@@ -1,44 +1,48 @@
-import { PropertyCard } from "@/components/property-card";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { PropertyCard } from "@/components/PropertyCard";
 import { Search } from "lucide-react";
-import { prisma } from "@/lib/db";
 
-export default async function HomePage() {
-  // const properties = await prisma.property.findMany({
-  //   take: 6,
-  //   orderBy: {
-  //     createdAt: "desc",
-  //   },
-  //   include: {
-  //     agent: true,
-  //   },
-  // });
-  const properties = [
-    {
-      id: "1",
-      title: "Beautiful Family Home",
-      address: "123 Main St",
-      description: "A lovely family home with a spacious garden.",
-      price: 500000,
-      city: "Springfield",
-      state: "IL",
-      zipCode: "62704",
+// Mock data - replace with actual API call
+const mockProperties = [
+  {
+    id: "1",
+    title: "Luxury Waterfront Villa",
+    description: "Beautiful waterfront property with stunning views",
+    price: 1250000,
+    location: {
+      address: "123 Ocean Drive",
+      city: "Miami",
+      state: "FL",
+      zipCode: "33139",
+      coordinates: { lat: 25.7617, lng: -80.1918 }
+    },
+    features: {
       bedrooms: 4,
       bathrooms: 3,
-      squareFeet: 2500,
-      yearBuilt: 1995,
-      agentId: "agent1",
-      agent: {
-        name: "John Doe",
-        image: "https://example.com/agent.jpg",
-      },
-      images: ["https://example.com/property.jpg"],
-      status: "available",
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      squareFeet: 3200,
+      yearBuilt: 2020,
+      propertyType: "house"
     },
-  ];
+    images: ["https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80"],
+    amenities: ["Pool", "Garden", "Garage"],
+    status: "for-sale",
+    listedDate: "2024-03-15",
+    agent: {
+      id: "a1",
+      name: "John Smith",
+      email: "john@example.com",
+      phone: "555-0123",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80"
+    }
+  },
+  // Add more mock properties here
+] as const;
+
+export function HomePage() {
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -51,6 +55,8 @@ export default async function HomePage() {
           <div className="max-w-2xl mx-auto flex gap-2">
             <Input
               placeholder="Search by location, property type, or features..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="bg-white/90"
             />
             <Button>
@@ -66,7 +72,7 @@ export default async function HomePage() {
         <div className="container px-4">
           <h2 className="text-3xl font-bold mb-8">Featured Properties</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {properties.map((property) => (
+            {mockProperties.map((property) => (
               <PropertyCard key={property.id} property={property} />
             ))}
           </div>
