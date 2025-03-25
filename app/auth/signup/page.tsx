@@ -1,6 +1,6 @@
-import { SignInForm } from "@/components/auth/sign-in-form";
+import { SignUpForm } from "@/components/auth/sign-up-form";
 
-export default function SignInPage() {
+export default function SignupPage() {
   return (
     <div className="container flex h-[calc(100vh-4rem)] w-full flex-col items-center justify-center px-2">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
@@ -12,7 +12,7 @@ export default function SignInPage() {
             Sign in to your account to continue
           </p>
         </div>
-        <SignInForm />
+        <SignUpForm />
       </div>
     </div>
   );

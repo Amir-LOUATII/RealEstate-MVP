@@ -1,9 +1,5 @@
-import * as React from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { signIn } from "next-auth/react"
-import { Button } from "@/components/ui/button"
+"use client";
+
 import {
   Form,
   FormControl,
@@ -11,122 +7,72 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useToast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
-
-const formSchema = z.object({
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters.",
-  }),
-})
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { signInWithCredentials } from "@/lib/actions/auth-actions";
+import { loginFormSchema } from "@/schemas/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { startTransition, useActionState, useRef } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { SubmitButton } from "./submit-button";
+import { Divider } from "./divider";
+import { GoogleSignInButton } from "./google-sign-in-button";
 
 export function SignInForm() {
-  const [isLoading, setIsLoading] = React.useState(false)
-  const { toast } = useToast()
+  const [formState, formAction] = useActionState(signInWithCredentials, null);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof loginFormSchema>>({
+    resolver: zodResolver(loginFormSchema),
     defaultValues: {
       email: "",
       password: "",
     },
-  })
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true)
-
-    try {
-      const result = await signIn("credentials", {
-        email: values.email,
-        password: values.password,
-        redirect: true,
-        callbackUrl: "/",
-      })
-
-      if (result?.error) {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Invalid email or password",
-        })
-      }
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong. Please try again.",
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
+    mode: "onTouched",
+  });
 
   return (
     <div className="grid gap-6">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="example@email.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button className="w-full" type="submit" disabled={isLoading}>
-            {isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            Sign in
-          </Button>
+        <form
+          ref={formRef}
+          onSubmit={form.handleSubmit(() =>
+            startTransition(() => formAction(new FormData(formRef.current!)))
+          )}
+          className="space-y-4"
+        >
+          {(["email", "password"] as const).map((name) => (
+            <FormField
+              key={name}
+              control={form.control}
+              name={name}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    {name === "email" ? "Email" : "Password"}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type={name === "password" ? "password" : "text"}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                  {formState?.errors?.[name] && (
+                    <p className="text-red-500 text-sm">
+                      {formState.errors[name]}
+                    </p>
+                  )}
+                </FormItem>
+              )}
+            />
+          ))}
+          <SubmitButton />
         </form>
       </Form>
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-      </div>
-      <Button
-        variant="outline"
-        type="button"
-        disabled={isLoading}
-        onClick={() => signIn("google", { callbackUrl: "/" })}
-      >
-        {isLoading ? (
-          <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Icons.google className="mr-2 h-4 w-4" />
-        )}
-        Google
-      </Button>
+      <Divider text="Or continue with" />
+      <GoogleSignInButton />
     </div>
-  )
+  );
 }
