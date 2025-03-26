@@ -4,6 +4,8 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
 import { Bed, Bath, Square } from "lucide-react";
+import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface PropertyCardProps {
   property: Property & {
@@ -19,7 +21,8 @@ export function PropertyCard({ property }: PropertyCardProps) {
     <Link href={`/properties/${property.id}`}>
       <Card className="overflow-hidden hover:shadow-lg transition-shadow">
         <AspectRatio ratio={16 / 9}>
-          <img
+          <Image
+            fill
             src={property.images[0]}
             alt={property.title}
             className="object-cover w-full h-full"
@@ -53,12 +56,18 @@ export function PropertyCard({ property }: PropertyCardProps) {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="p-4 pt-0 flex items-center">
-          <img
-            src={property?.agent?.image || ""}
-            alt={property?.agent?.image || ""}
-            className="h-8 w-8 rounded-full mr-2"
-          />
+        <CardFooter className="p-4 pt-0 flex items-center gap-1">
+          <div className="h-8 w-8 ">
+            {" "}
+            <Avatar>
+              <AvatarImage
+                src={property?.agent?.image || ""}
+                alt={property?.agent?.image || ""}
+                className="h-8 w-8 rounded-full mr-2"
+              />
+              <AvatarFallback>AL</AvatarFallback>
+            </Avatar>
+          </div>
           <span className="text-sm text-muted-foreground">
             {property?.agent?.name || "agent name"}
           </span>
