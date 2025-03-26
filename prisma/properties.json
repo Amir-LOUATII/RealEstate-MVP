@@ -1,0 +1,160 @@
+[
+  {
+    "title": "Modern Downtown Loft",
+    "description": "Stylish loft in the heart of the city with amazing skyline views. Open floor plan with high ceilings and large windows.",
+    "price": 750000,
+    "address": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "squareFeet": 1800,
+    "yearBuilt": 2015,
+    "images": [
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&auto=format&fit=crop"
+    ],
+    "status": "FOR_SALE"
+  },
+  {
+    "title": "Lakeside Cottage",
+    "description": "Charming 3-bedroom cottage on the lake with private dock. Perfect for weekend getaways or year-round living.",
+    "price": 425000,
+    "address": "456 Lakeview Dr",
+    "city": "Lake Tahoe",
+    "state": "CA",
+    "zipCode": "96150",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "squareFeet": 2200,
+    "yearBuilt": 1998,
+    "images": [
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&auto=format&fit=crop"
+    ],
+    "status": "FOR_SALE"
+  },
+  {
+    "id": "prop1",
+    "title": "Modern Downtown Loft",
+    "description": "Stylish loft in the heart of the city with amazing skyline views. Open floor plan with high ceilings and large windows.",
+    "price": 750000,
+    "address": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "squareFeet": 1800,
+    "yearBuilt": 2015,
+    "images": [
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&auto=format&fit=crop"
+    ],
+    "status": "FOR_SALE"
+  },
+  {
+    "id": "prop2",
+    "title": "Lakeside Cottage",
+    "description": "Charming 3-bedroom cottage on the lake with private dock. Perfect for weekend getaways or year-round living.",
+    "price": 425000,
+    "address": "456 Lakeview Dr",
+    "city": "Lake Tahoe",
+    "state": "CA",
+    "zipCode": "96150",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "squareFeet": 2200,
+    "yearBuilt": 1998,
+    "images": [
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&auto=format&fit=crop"
+    ],
+    "status": "FOR_SALE"
+  },
+  {
+    "id": "prop3",
+    "title": "Historic Brownstone",
+    "description": "Beautifully restored 4-story brownstone with original details and modern amenities. Located in a prime neighborhood.",
+    "price": 1200000,
+    "address": "789 Oak Ave",
+    "city": "Boston",
+    "state": "MA",
+    "zipCode": "02108",
+    "bedrooms": 4,
+    "bathrooms": 3.5,
+    "squareFeet": 3500,
+    "yearBuilt": 1890,
+    "images": [
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=800&auto=format&fit=crop"
+    ],
+    "status": "FOR_SALE"
+  },
+  {
+    "id": "prop4",
+    "title": "Desert Modern Home",
+    "description": "Stunning desert modern home with panoramic views. Features a saltwater pool and outdoor entertaining area.",
+    "price": 895000,
+    "address": "101 Palm Canyon Dr",
+    "city": "Palm Springs",
+    "state": "CA",
+    "zipCode": "92262",
+    "bedrooms": 3,
+    "bathrooms": 2.5,
+    "squareFeet": 2400,
+    "yearBuilt": 2018,
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&auto=format&fit=crop"
+    ],
+    "status": "FOR_SALE"
+  },
+  {
+    "id": "prop5",
+    "title": "Mountain Retreat",
+    "description": "Cozy log cabin with stunning mountain views. Features a wood-burning fireplace and large deck.",
+    "price": 350000,
+    "address": "202 Alpine Way",
+    "city": "Aspen",
+    "state": "CO",
+    "zipCode": "81611",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "squareFeet": 1200,
+    "yearBuilt": 1985,
+    "images": [
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&auto=format&fit=crop"
+    ],
+    "status": "FOR_SALE"
+  },
+  {
+    "id": "prop6",
+    "title": "Beachfront Villa",
+    "description": "Luxury beachfront property with private beach access. Open floor plan with floor-to-ceiling windows.",
+    "price": 2500000,
+    "address": "303 Coastal Hwy",
+    "city": "Miami",
+    "state": "FL",
+    "zipCode": "33139",
+    "bedrooms": 5,
+    "bathrooms": 4.5,
+    "squareFeet": 4800,
+    "yearBuilt": 2019,
+    "images": [
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&auto=format&fit=crop"
+    ],
+    "status": "FOR_SALE"
+  }
+]
