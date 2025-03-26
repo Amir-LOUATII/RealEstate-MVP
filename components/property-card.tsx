@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Property } from "@prisma/client";
+import { Agent, Property } from "@prisma/client";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
@@ -9,10 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface PropertyCardProps {
   property: Property & {
-    agent: {
-      name: string;
-      image: string;
-    };
+    agent: Agent;
   };
 }
 
