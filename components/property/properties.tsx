@@ -3,6 +3,7 @@ import React from "react";
 import PropertyGrid from "./property-grid";
 import { PropertiesFilters } from "./filters/properties-filter";
 import { PropertiesQueryParams } from "@/lib/types";
+import PropertiesPagination from "./property-pagination";
 
 export default async function Properties({
   searchParams,
@@ -17,7 +18,14 @@ export default async function Properties({
     "
     >
       <PropertiesFilters />
-      <PropertyGrid properties={properties.properties} />;
+      <div className="w-full">
+        <PropertyGrid properties={properties.properties} />
+        <PropertiesPagination
+          totalPages={properties?.pagination?.totalPages}
+          currentPage={properties?.pagination?.currentPage}
+          pageSize={properties?.pagination?.pageSize}
+        />
+      </div>
     </div>
   );
 }
