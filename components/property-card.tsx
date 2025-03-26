@@ -1,17 +1,17 @@
-import Link from "next/link"
-import { Property } from "@prisma/client"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { Badge } from "@/components/ui/badge"
-import { Bed, Bath, Square } from "lucide-react"
+import Link from "next/link";
+import { Property } from "@prisma/client";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Badge } from "@/components/ui/badge";
+import { Bed, Bath, Square } from "lucide-react";
 
 interface PropertyCardProps {
   property: Property & {
     agent: {
-      name: string
-      image: string
-    }
-  }
+      name: string;
+      image: string;
+    };
+  };
 }
 
 export function PropertyCard({ property }: PropertyCardProps) {
@@ -27,7 +27,9 @@ export function PropertyCard({ property }: PropertyCardProps) {
         </AspectRatio>
         <CardContent className="p-4">
           <div className="flex justify-between items-start mb-2">
-            <h3 className="text-lg font-semibold line-clamp-1">{property.title}</h3>
+            <h3 className="text-lg font-semibold line-clamp-1">
+              {property.title}
+            </h3>
             <Badge>{property.status}</Badge>
           </div>
           <p className="text-2xl font-bold text-primary mb-2">
@@ -53,13 +55,15 @@ export function PropertyCard({ property }: PropertyCardProps) {
         </CardContent>
         <CardFooter className="p-4 pt-0 flex items-center">
           <img
-            src={property.agent.image}
-            alt={property.agent.name}
+            src={property?.agent?.image || ""}
+            alt={property?.agent?.image || ""}
             className="h-8 w-8 rounded-full mr-2"
           />
-          <span className="text-sm text-muted-foreground">{property.agent.name}</span>
+          <span className="text-sm text-muted-foreground">
+            {property?.agent?.name || "agent name"}
+          </span>
         </CardFooter>
       </Card>
     </Link>
-  )
+  );
 }
