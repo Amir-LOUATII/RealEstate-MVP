@@ -1,78 +1,43 @@
-"use client";
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { signInWithCredentials } from "@/lib/actions/auth-actions";
-import { loginFormSchema } from "@/schemas/schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { startTransition, useActionState, useRef } from "react";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { SubmitButton } from "./submit-button";
-import { Divider } from "./divider";
-import { GoogleSignInButton } from "./google-sign-in-button";
+
+import Link from "next/link";
+import { SubmitButton } from "../auth/submit-button";
+import FormContainer from "../form/FormContainer";
+import FormInput from "../form/FormInput";
 
 export function SignInForm() {
-  const [formState, formAction] = useActionState(signInWithCredentials, null);
-  const formRef = useRef<HTMLFormElement>(null);
-
-  const form = useForm<z.infer<typeof loginFormSchema>>({
-    resolver: zodResolver(loginFormSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-    mode: "onTouched",
-  });
-
   return (
-    <div className="grid gap-6">
-      <Form {...form}>
-        <form
-          ref={formRef}
-          onSubmit={form.handleSubmit(() =>
-            startTransition(() => formAction(new FormData(formRef.current!)))
-          )}
-          className="space-y-4"
+    <div className="w-full md:max-w-md lg:max-w-sm  p-3 md:p-6 rounded-2xl shadow-md mx-auto bg-header-foreground dark:bg-primary-foreground mt-3 ">
+      <h1 className="text-2xl font-bold text-center mb-6">Sign In</h1>
+
+      <FormContainer action={signInWithCredentials}>
+        <FormInput
+          defaultValue="admin@guest.com"
+          name="email"
+          type="email"
+          label="Email"
+          placeholder="Please enter your email"
+        />
+        <FormInput
+          defaultValue="adminguest123456789"
+          name="password"
+          type="password"
+          label="Password"
+          placeholder="Please enter your password"
+        />
+        <SubmitButton />
+      </FormContainer>
+      <p className="my-2 mx-auto text-center">Or</p>
+
+      <p className="text-center mt-4">
+        Don’t have an account?{" "}
+        <Link
+          href="/auth/register"
+          className="text-blue-500 hover:underline text-nowrap"
         >
-          {(["email", "password"] as const).map((name) => (
-            <FormField
-              key={name}
-              control={form.control}
-              name={name}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    {name === "email" ? "Email" : "Password"}
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      type={name === "password" ? "password" : "text"}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                  {formState?.errors?.[name] && (
-                    <p className="text-red-500 text-sm">
-                      {formState.errors[name]}
-                    </p>
-                  )}
-                </FormItem>
-              )}
-            />
-          ))}
-          <SubmitButton />
-        </form>
-      </Form>
-      <Divider text="Or continue with" />
-      <GoogleSignInButton />
+          Sign Up
+        </Link>
+      </p>
     </div>
   );
 }

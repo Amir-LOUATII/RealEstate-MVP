@@ -23,58 +23,50 @@ export function SignUpForm() {
         className="space-y-4"
       >
         <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="firstName">First Name</Label>
+          {["firstName", "lastName"].map((field) => (
+            <div key={field} className="space-y-2">
+              <Label htmlFor={field}>
+                {field === "firstName" ? "First Name" : "Last Name"}
+              </Label>
+              <Input
+                id={field}
+                name={field}
+                defaultValue={formState?.fields?.[field]}
+              />
+              {formState?.errors?.[field] && (
+                <p className="text-sm text-red-500">
+                  {formState.errors[field]}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {["email", "password", "confirmPassword"].map((field) => (
+          <div key={field} className="space-y-2">
+            <Label htmlFor={field}>
+              {field === "email"
+                ? "Email"
+                : field === "password"
+                ? "Password"
+                : "Confirm Password"}
+            </Label>
             <Input
-              id="firstName"
-              name="firstName"
-              defaultValue={formState?.fields?.firstName}
+              id={field}
+              name={field}
+              type={field.includes("password") ? "password" : "text"}
+              defaultValue={formState?.fields?.[field]}
             />
+            {formState?.errors?.[field] && (
+              <p className="text-sm text-red-500">{formState.errors[field]}</p>
+            )}
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="lastName">Last Name</Label>
-            <Input
-              id="lastName"
-              name="lastName"
-              defaultValue={formState?.fields?.lastName}
-            />
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            defaultValue={formState?.fields?.email}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            defaultValue={formState?.fields?.password}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="confirmPassword">Confirm Password</Label>
-          <Input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            defaultValue={formState?.fields?.confirmPassword}
-          />
-        </div>
+        ))}
 
         {formState?.message && (
           <p
             className={`text-sm ${
-              formState?.success ? "text-green-600" : "text-destructive"
+              formState?.success ? "text-green-600" : "text-red-500"
             }`}
           >
             {formState.message}
@@ -85,7 +77,7 @@ export function SignUpForm() {
       </form>
 
       <div className="text-center text-sm">
-        Already have an account?
+        Already have an account?{" "}
         <Link href="/auth/signin" className="underline">
           Sign in
         </Link>
