@@ -91,6 +91,7 @@ model Authenticator {
 model Property {
   id          String   @id @default(cuid())
   title       String
+  featured    Boolean @default(false)
   description String   @db.Text
   price       Float
   address     String

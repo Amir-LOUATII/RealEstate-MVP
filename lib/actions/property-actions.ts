@@ -42,8 +42,6 @@ export async function getAllProperties({
     }
     const skip = Number(page) * Number(pageSize);
     const take = Number(pageSize);
-    console.log("filters", filters);
-    console.log("status", status);
 
     const [totalCount, properties] = await Promise.all([
       prisma.property.count({
@@ -80,4 +78,12 @@ export async function getProductById(id: string) {
     where: { id: id },
   });
   return product;
+}
+
+export async function getFeaturedProperties() {
+  const properties = await prisma.property.findMany({
+    where: { featured: false },
+  });
+
+  return properties;
 }
