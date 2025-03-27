@@ -1,9 +1,10 @@
-import { Property } from "@prisma/client"
-import { Badge } from "@/components/ui/badge"
-import { Bed, Bath, Square, Calendar, MapPin } from "lucide-react"
+import { Property } from "@prisma/client";
+import { Badge } from "@/components/ui/badge";
+import { Bed, Bath, Square, Calendar, MapPin } from "lucide-react";
+import { formatStatus } from "@/utils/format";
 
 interface PropertyInfoProps {
-  property: Property
+  property: Property;
 }
 
 export function PropertyInfo({ property }: PropertyInfoProps) {
@@ -21,7 +22,7 @@ export function PropertyInfo({ property }: PropertyInfoProps) {
           <p className="text-3xl font-bold text-primary">
             ${property.price.toLocaleString()}
           </p>
-          <Badge className="mt-2">{property.status}</Badge>
+          <Badge className="mt-2">{formatStatus(property.status)}</Badge>
         </div>
       </div>
 
@@ -49,5 +50,5 @@ export function PropertyInfo({ property }: PropertyInfoProps) {
         <p className="text-muted-foreground">{property.description}</p>
       </div>
     </div>
-  )
+  );
 }
