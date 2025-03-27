@@ -1,5 +1,6 @@
 "use server";
 
+import { PropertyStatus } from "@prisma/client";
 import { prisma } from "../db";
 import { PropertiesQueryParams } from "../types";
 
@@ -12,16 +13,17 @@ interface Filters {
   OR?: Array<{
     title?: { contains: string; mode: "insensitive" };
   }>;
-
+  status?: PropertyStatus;
   price?: PriceFilter;
 }
 
 export async function getAllProperties({
   search = "",
   page = "0",
-  pageSize = "10", // Changed default to a more reasonable value
+  pageSize = "6", // Changed default to a more reasonable value
   minPrice,
   maxPrice,
+  status,
 }: PropertiesQueryParams) {
   try {
     const filters: Filters = {};
@@ -35,9 +37,13 @@ export async function getAllProperties({
       if (minPrice !== undefined) filters.price.gte = Number(minPrice);
       if (maxPrice !== undefined) filters.price.lte = Number(maxPrice);
     }
-
+    if (status) {
+      filters.status = status;
+    }
     const skip = Number(page) * Number(pageSize);
     const take = Number(pageSize);
+    console.log("filters", filters);
+    console.log("status", status);
 
     const [totalCount, properties] = await Promise.all([
       prisma.property.count({

@@ -1,3 +1,5 @@
+import { PropertyStatus } from "@prisma/client";
+
 export type actionFunction = (
   prevState: unknown,
   formData: FormData
@@ -14,4 +16,5 @@ export type PropertiesQueryParams = {
   pageSize?: string;
   minPrice?: number;
   maxPrice?: number;
+  status?: PropertyStatus;
 };

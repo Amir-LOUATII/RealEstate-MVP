@@ -3,16 +3,18 @@ import { PropertiesPageSkeleton } from "@/components/property/properties-page-sk
 import { PropertiesQueryParams } from "@/lib/types";
 import { Suspense } from "react";
 
-export default function PropertiesPage({
+export default async function PropertiesPage({
   searchParams,
 }: {
   searchParams: PropertiesQueryParams;
 }) {
+  const params = await searchParams;
+
   return (
     <section className=" page w-full ">
       <div className="container mx-auto">
         <Suspense fallback={<PropertiesPageSkeleton />}>
-          <Properties searchParams={searchParams} />
+          <Properties searchParams={params} />
         </Suspense>
       </div>
     </section>

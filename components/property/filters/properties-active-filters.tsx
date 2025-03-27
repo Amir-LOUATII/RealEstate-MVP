@@ -1,23 +1,25 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
+import { PropertyStatus } from "@prisma/client";
 import { X } from "lucide-react";
 
 interface Filters {
   searchQuery: string | null;
+  selectedStatus: PropertyStatus | "";
   priceRange: number[];
 }
 
 interface ActiveFiltersProps {
   filters: Filters;
-  onResetFilter: (filterType: "search" | "category" | "price") => void;
+  onResetFilter: (filterType: "search" | "status" | "price") => void;
 }
 
 export default function PropertiesActiveFilters({
   filters,
   onResetFilter,
 }: ActiveFiltersProps) {
-  const { searchQuery, priceRange } = filters;
+  const { searchQuery, priceRange, selectedStatus } = filters;
 
   const hasActiveFilters =
     searchQuery || priceRange[0] !== 0 || priceRange[1] !== 2000;
@@ -64,6 +66,23 @@ export default function PropertiesActiveFilters({
               onClick={() => onResetFilter("price")}
               className="ml-1 rounded-full hover:bg-primary/10 p-0.5 transition-colors"
               aria-label="Remove price filter"
+            >
+              <X className="h-3 w-3 text-muted-foreground group-hover:text-foreground transition-colors" />
+            </button>
+          </Badge>
+        )}
+        {selectedStatus && (
+          <Badge
+            variant="outline"
+            className="bg-primary/5 capitalize pl-3 pr-2 py-1.5 flex items-center gap-1 group"
+          >
+            <span>
+              Status: {selectedStatus.replaceAll("_", " ")?.toLowerCase()}
+            </span>
+            <button
+              onClick={() => onResetFilter("status")}
+              className="ml-1 rounded-full hover:bg-primary/10 p-0.5 transition-colors"
+              aria-label="Remove category filter"
             >
               <X className="h-3 w-3 text-muted-foreground group-hover:text-foreground transition-colors" />
             </button>

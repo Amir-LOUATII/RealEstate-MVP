@@ -11,6 +11,8 @@ import { RefreshCw } from "lucide-react";
 import { PriceFilter } from "./price-filter";
 import ProductsActiveFilters from "./properties-active-filters";
 import { SearchFilter } from "./search-filter";
+import { StatusFilter } from "./status-filter";
+import { PropertyStatus } from "@prisma/client";
 
 // Default filter values as constants
 const DEFAULT_FILTER_VALUES = {
@@ -36,6 +38,7 @@ export function PropertiesFilters({
   const searchParams = useSearchParams();
 
   const initialSearchQuery = searchParams?.get("search") || "";
+  const initialCategory = (searchParams?.get("status") as PropertyStatus) || "";
   const initialMinPrice = searchParams?.get("minPrice")
     ? Number.parseInt(searchParams?.get("minPrice") as string)
     : defaultMinPrice;
@@ -52,12 +55,14 @@ export function PropertiesFilters({
   const [filters, setFilters] = useState<{
     searchQuery: string;
     priceRange: number[];
+    selectedStatus: PropertyStatus | "";
     page: number;
     pageSize: number;
   }>({
     searchQuery: initialSearchQuery,
     priceRange: [initialMinPrice, initialMaxPrice],
     page: initialPage,
+    selectedStatus: initialCategory,
     pageSize: initialPageSize,
   });
 
@@ -67,6 +72,7 @@ export function PropertiesFilters({
       search: filters.searchQuery,
       minPrice: filters.priceRange[0],
       maxPrice: filters.priceRange[1],
+      selectedStatus: filters.selectedStatus,
       page: filters.page,
       pageSize: filters.pageSize,
       hasActiveFilters:
@@ -77,6 +83,7 @@ export function PropertiesFilters({
     };
   }, [
     filters.searchQuery,
+    filters.selectedStatus,
     filters.priceRange,
     filters.page,
     filters.pageSize,
@@ -90,12 +97,13 @@ export function PropertiesFilters({
       priceRange: [defaultMinPrice, defaultMaxPrice],
       page: DEFAULT_FILTER_VALUES.PAGE,
       pageSize: defaultPageSize,
+      selectedStatus: "",
     });
     router.replace("/properties");
   };
 
   const resetFilter = (
-    filterType: "search" | "category" | "price" | "pagination"
+    filterType: "search" | "status" | "price" | "pagination"
   ) => {
     switch (filterType) {
       case "search":
@@ -123,6 +131,11 @@ export function PropertiesFilters({
         newParams.set("search", derivedFilters.search);
       } else {
         newParams.delete("search");
+      }
+      if (derivedFilters.selectedStatus) {
+        newParams.set("status", derivedFilters.selectedStatus);
+      } else {
+        newParams.delete("status");
       }
 
       // Handle price parameters
@@ -187,6 +200,14 @@ export function PropertiesFilters({
             searchQuery: value,
             page: DEFAULT_FILTER_VALUES.PAGE,
           })
+        }
+      />
+      <Separator />
+      <StatusFilter
+        status={Object.values(PropertyStatus)}
+        selectedStatus={filters.selectedStatus}
+        setSelectedStatus={(value: PropertyStatus | null) =>
+          setFilters({ ...filters, selectedStatus: value || "" })
         }
       />
       <Separator />
