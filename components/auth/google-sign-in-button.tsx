@@ -1,6 +1,7 @@
 import { signIn } from "@/auth";
 import { Button } from "../ui/button";
-
+import GoogleIcon from "@/assets/google-icon.svg";
+import Image from "next/image";
 export function GoogleSignInButton() {
   return (
     <Button
@@ -8,12 +9,7 @@ export function GoogleSignInButton() {
       type="button"
       onClick={() => signIn("google", { callbackUrl: "/" })}
     >
-      <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
-        <path
-          fill="currentColor"
-          d="M12.545 10.239v3.821h5.445c-0.712 2.315-2.647 3.972-5.445 3.972-3.332 0-6.033-2.701-6.033-6.032s2.701-6.032 6.033-6.032c1.498 0 2.866 0.549 3.921 1.453l2.814-2.814c-1.784-1.664-4.153-2.675-6.735-2.675-5.522 0-10 4.477-10 10s4.478 10 10 10c8.396 0 10-7.524 10-10 0-0.67-0.069-1.325-0.189-1.961h-9.811z"
-        />
-      </svg>
+      <Image src={GoogleIcon} fill alt="google-icon" />
       Google
     </Button>
   );
