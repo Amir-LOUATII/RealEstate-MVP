@@ -115,6 +115,12 @@ export function PropertiesFilters({
           priceRange: [defaultMinPrice, defaultMaxPrice],
         });
         break;
+      case "status":
+        setFilters({
+          ...filters,
+          selectedStatus: "",
+        });
+        break;
       case "pagination":
         setFilters({ ...filters, page: DEFAULT_FILTER_VALUES.PAGE });
         break;
