@@ -1,4 +1,5 @@
 import { Slider } from "@/components/ui/slider";
+import { formatCurrency } from "@/utils/format";
 
 export function PriceFilter({
   priceRange,
@@ -9,16 +10,16 @@ export function PriceFilter({
 }) {
   return (
     <div className="space-y-2">
-      <div className="flex justify-between items-center">
+      <div>
         <h3 className="font-medium">Price Range</h3>
-        <span className="text-sm text-muted-foreground">
-          ${priceRange[0]} - ${priceRange[1]}
+        <span className="text-sm text-muted-foreground flex justify-between">
+          {formatCurrency(priceRange[0])} - {formatCurrency(priceRange[1])}
         </span>
       </div>
       <Slider
-        min={0}
-        max={2000}
-        step={50}
+        min={100000}
+        max={5000000}
+        step={50000}
         value={priceRange}
         onValueChange={(val) => setPriceRange([val[0], val[1]])}
         className="py-4"
