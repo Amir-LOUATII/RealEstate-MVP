@@ -1,7 +1,4 @@
-import React from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Search } from "lucide-react";
+import SearchInput from "./search-input";
 
 export default function Hero() {
   return (
@@ -11,16 +8,7 @@ export default function Hero() {
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
           Find Your Dream Home
         </h1>
-        <div className="max-w-2xl mx-auto flex gap-2">
-          <Input
-            placeholder="Search by location, property type, or features..."
-            className="bg-white/90"
-          />
-          <Button>
-            <Search className="h-4 w-4 mr-2" />
-            Search
-          </Button>
-        </div>
+        <SearchInput />
       </div>
     </section>
   );

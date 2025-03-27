@@ -3,6 +3,7 @@
 import { PropertyStatus } from "@prisma/client";
 import { prisma } from "../db";
 import { PropertiesQueryParams } from "../types";
+import { redirect } from "next/navigation";
 
 interface PriceFilter {
   gte?: number;
@@ -76,15 +77,21 @@ export async function getAllProperties({
 export async function getPropertyById(id: string) {
   const product = await prisma.property.findUnique({
     where: { id: id },
-    include: { agent: true, features: { include: { feature: true } } },
+    include: { agent: true, features: true },
   });
   return product;
 }
 
 export async function getFeaturedProperties() {
   const properties = await prisma.property.findMany({
-    where: { featured: false },
+    where: { featured: true },
+    include: { agent: true },
   });
 
   return properties;
+}
+
+export async function searchProperty(prevState: unknown, formData: FormData) {
+  const search = formData.get("search");
+  redirect("/properties?search=" + search);
 }
