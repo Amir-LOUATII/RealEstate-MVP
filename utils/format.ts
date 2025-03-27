@@ -15,5 +15,5 @@ export function formatDateDDMMYYYY(date: Date): string {
 }
 
 export function formatStatus(status: string) {
-  return status.replaceAll("_", " ").toLowerCase();
+  return status.replaceAll("_", " ").toUpperCase();
 }
