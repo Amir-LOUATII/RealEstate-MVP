@@ -1,8 +1,8 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, Award, Star } from "lucide-react";
-import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
 import { Agent } from "@prisma/client";
+import { Award, Phone, Star } from "lucide-react";
+import Image from "next/image";
 
 interface AgentCardProps {
   agent: Agent;
@@ -17,8 +17,7 @@ export function AgentCard({ agent }: AgentCardProps) {
             <Image
               src={agent?.image || "/placeholder.svg?height=64&width=64"}
               alt={agent?.name}
-              width={64}
-              height={64}
+              fill
               className="rounded-full object-cover"
             />
           </div>
@@ -72,10 +71,6 @@ export function AgentCard({ agent }: AgentCardProps) {
           <Button className="w-full" variant="outline">
             <Phone className="h-4 w-4 mr-2" />
             {agent?.phone}
-          </Button>
-          <Button className="w-full">
-            <Mail className="h-4 w-4 mr-2" />
-            Contact Agent
           </Button>
         </div>
       </CardContent>

@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 interface PropertyGalleryProps {
   images: string[];
@@ -89,6 +89,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
 
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
         <DialogContent className="max-w-5xl p-0 bg-background/95 backdrop-blur-sm">
+          <DialogTitle />
           <div className="relative h-[80vh]">
             <Image
               src={images[currentImageIndex] || "/placeholder.svg"}
@@ -96,14 +97,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
               fill
               className="object-contain"
             />
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4 rounded-full bg-background/80"
-              onClick={() => setLightboxOpen(false)}
-            >
-              <X className="h-4 w-4" />
-            </Button>
+
             <Button
               variant="ghost"
               size="icon"

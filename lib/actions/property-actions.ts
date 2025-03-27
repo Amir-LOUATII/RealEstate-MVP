@@ -72,7 +72,7 @@ export async function getAllProperties({
 export async function getPropertyById(id: string) {
   const product = await prisma.property.findUnique({
     where: { id: id },
-    include: { agent: true, features: true },
+    include: { agent: true, features: { include: { feature: true } } },
   });
   return product;
 }

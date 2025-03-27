@@ -14,6 +14,6 @@ export function formatDateDDMMYYYY(date: Date): string {
   return `${day}-${month}-${year}`;
 }
 
-export function formatCategory(status: string) {
-  return status.replaceAll("_", " ").toLowerCase();
+export function formatStatus(status: string) {
+  return status.replaceAll("_", " ").toUpperCase();
 }

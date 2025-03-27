@@ -22,7 +22,7 @@ export default async function PropertyPage({
   if (!property) return notFound();
   return (
     <div className="min-h-screen bg-background py-8">
-      <div className="container px-4">
+      <div className="container px-4 mx-auto">
         <Link
           href="/properties"
           className="flex items-center text-muted-foreground hover:text-foreground mb-6 transition-colors"
