@@ -7,7 +7,7 @@ export default async function HomePage() {
     <div className="min-h-screen bg-background">
       <Hero />
 
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<FeaturedProperties />}>
         <FeaturedProperties />
       </Suspense>
     </div>

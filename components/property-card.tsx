@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bed, Bath, Square } from "lucide-react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { formatStatus } from "@/utils/format";
 
 interface PropertyCardProps {
   property: Property & {
@@ -30,7 +31,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
             <h3 className="text-lg font-semibold line-clamp-1">
               {property.title}
             </h3>
-            <Badge>{property.status}</Badge>
+            <Badge>{formatStatus(property.status)}</Badge>
           </div>
           <p className="text-2xl font-bold text-primary mb-2">
             ${property.price.toLocaleString()}
